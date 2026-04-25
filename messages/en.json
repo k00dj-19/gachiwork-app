@@ -12,13 +12,18 @@
   "home": {
     "verifiedBadge": "✓ VERIFIED E-9",
     "greeting": "Hello, {name}",
+    "greetingAnon": "Welcome to GachiWork",
     "subgreeting": "Activity from your boards and communities.",
+    "subgreetingAnon": "Sign in to see what your peers are sharing.",
     "tabFollowed": "Followed Boards",
     "tabCommunity": "Community Pages",
     "officialGuideTag": "OFFICIAL GUIDE",
     "officialGuideTitle": "Renewing your E-9 Visa?",
     "officialGuideBody": "Step-by-step documentation guide for 2026 industrial workers.",
-    "officialGuideCta": "Read Guide"
+    "officialGuideCta": "Read Guide",
+    "emptyTitle": "No posts yet",
+    "emptyBody": "Be the first to share. Tap the + button to start.",
+    "signinCta": "Sign In"
   },
   "post": {
     "tags": {
@@ -43,17 +48,17 @@
   },
   "auth": {
     "signinTitle": "GachiWork",
-    "signinSubtitle": "Welcome back, your community is waiting.",
-    "userIdLabel": "User ID (Anonymous ID)",
-    "userIdPlaceholder": "Enter your ID",
-    "userIdHelper": "Your ID is found in your onboarding documents.",
-    "passwordLabel": "Password",
-    "forgotPassword": "Forgot Password?",
-    "signinCta": "Sign In",
-    "orSecure": "OR SECURE LINK",
-    "googleSignin": "Sign in with Google",
+    "signinSubtitle": "We email you a magic link. No password needed.",
+    "emailLabel": "Email",
+    "emailPlaceholder": "you@example.com",
+    "emailHelper": "Use the email you signed up with.",
+    "signinCta": "Email me a sign-in link",
     "noAccount": "Don't have an account?",
     "signupLink": "Sign Up",
+    "checkInboxTitle": "Check your inbox",
+    "checkInboxBody": "We sent a sign-in link to {email}. Tap the link in the email to finish signing in.",
+    "resendLink": "Send again",
+    "invalidEmail": "Please enter a valid email address.",
     "globalSupport": "GLOBAL SUPPORT AVAILABLE"
   },
   "regions": {
@@ -63,23 +68,23 @@
   },
   "signup": {
     "title": "Create Account",
-    "subtitle": "Start your journey safely and anonymously. Your privacy is our priority.",
+    "subtitle": "Start safely and anonymously. We send a magic link by email — no password required.",
     "togglePrivacy": "Full Privacy",
     "toggleSecure": "Secure Work",
-    "nicknameLabel": "Nickname (User ID)",
+    "emailLabel": "Email",
+    "emailPlaceholder": "you@example.com",
+    "emailHelper": "We email a magic link to finish sign-up.",
+    "nicknameLabel": "Nickname",
     "nicknamePlaceholder": "e.g. BlueSkyWorker",
     "nicknameHelper": "Use a nickname. Do not use your real name for anonymity.",
-    "passwordLabel": "Password",
-    "nationalityLabel": "Nationality",
-    "nationalityPlaceholder": "Select your country",
-    "languageLabel": "Language",
-    "languagePlaceholder": "Select your language",
-    "languageHelper": "Posts are auto-translated from your language.",
-    "joinCta": "Join GachiWork",
+    "languageLabel": "Preferred language",
+    "joinCta": "Email me a sign-up link",
     "haveAccount": "Already have an account?",
     "loginLink": "Log in",
     "secureBadge": "🔒 END-TO-END SECURE PLATFORM",
-    "agreement": "By joining, you agree to our Terms of Service and Privacy Policy focusing on worker protection."
+    "agreement": "By joining, you agree to our Terms of Service and Privacy Policy focusing on worker protection.",
+    "missingDisplayName": "Please enter a nickname.",
+    "invalidEmail": "Please enter a valid email address."
   },
   "compose": {
     "title": "New Post",
@@ -92,7 +97,8 @@
     "countryLabel": "Country",
     "submitCta": "Post",
     "cancelCta": "Cancel",
-    "anonymousNotice": "Posted anonymously. Only your nickname is shown."
+    "anonymousNotice": "Posted anonymously. Only your nickname is shown.",
+    "notSignedIn": "Please sign in before posting."
   },
   "common": {
     "back": "Back",

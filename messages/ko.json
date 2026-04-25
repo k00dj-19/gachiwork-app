@@ -12,13 +12,18 @@
   "home": {
     "verifiedBadge": "✓ E-9 인증",
     "greeting": "안녕하세요, {name}님",
+    "greetingAnon": "GachiWork에 오신 걸 환영합니다",
     "subgreeting": "팔로우한 보드와 커뮤니티의 활동입니다.",
+    "subgreetingAnon": "로그인하면 동료들의 글을 볼 수 있어요.",
     "tabFollowed": "팔로우한 보드",
     "tabCommunity": "커뮤니티 페이지",
     "officialGuideTag": "공식 가이드",
     "officialGuideTitle": "E-9 비자 갱신 안내",
     "officialGuideBody": "2026년 산업 근로자를 위한 단계별 서류 가이드.",
-    "officialGuideCta": "가이드 읽기"
+    "officialGuideCta": "가이드 읽기",
+    "emptyTitle": "아직 글이 없어요",
+    "emptyBody": "첫 번째 글을 남겨보세요. + 버튼을 눌러 시작하세요.",
+    "signinCta": "로그인"
   },
   "post": {
     "tags": {
@@ -43,17 +48,17 @@
   },
   "auth": {
     "signinTitle": "GachiWork",
-    "signinSubtitle": "다시 만나서 반가워요. 커뮤니티가 기다리고 있습니다.",
-    "userIdLabel": "사용자 ID (익명 ID)",
-    "userIdPlaceholder": "ID를 입력하세요",
-    "userIdHelper": "온보딩 서류에 ID가 적혀 있습니다.",
-    "passwordLabel": "비밀번호",
-    "forgotPassword": "비밀번호 찾기",
-    "signinCta": "로그인",
-    "orSecure": "또는 보안 링크로",
-    "googleSignin": "Google로 로그인",
+    "signinSubtitle": "이메일로 매직 링크를 보내드려요. 비밀번호는 필요 없습니다.",
+    "emailLabel": "이메일",
+    "emailPlaceholder": "you@example.com",
+    "emailHelper": "가입할 때 사용한 이메일을 입력하세요.",
+    "signinCta": "로그인 링크 받기",
     "noAccount": "계정이 없으신가요?",
     "signupLink": "가입하기",
+    "checkInboxTitle": "이메일을 확인해주세요",
+    "checkInboxBody": "{email} 로 로그인 링크를 보냈어요. 메일함을 확인하고 링크를 누르면 자동으로 로그인됩니다.",
+    "resendLink": "다시 보내기",
+    "invalidEmail": "올바른 이메일 주소를 입력해주세요.",
     "globalSupport": "전 세계 지원 가능"
   },
   "regions": {
@@ -63,23 +68,23 @@
   },
   "signup": {
     "title": "계정 만들기",
-    "subtitle": "안전하고 익명으로 여정을 시작하세요. 개인정보 보호가 최우선입니다.",
+    "subtitle": "안전하고 익명으로 시작하세요. 비밀번호 없이 이메일 매직 링크로 가입합니다.",
     "togglePrivacy": "완전 익명",
     "toggleSecure": "안전한 일자리",
-    "nicknameLabel": "닉네임 (사용자 ID)",
+    "emailLabel": "이메일",
+    "emailPlaceholder": "you@example.com",
+    "emailHelper": "이메일로 매직 링크를 보내 가입을 완료합니다.",
+    "nicknameLabel": "닉네임",
     "nicknamePlaceholder": "예: BlueSkyWorker",
     "nicknameHelper": "익명성을 위해 본명 대신 닉네임을 사용하세요.",
-    "passwordLabel": "비밀번호",
-    "nationalityLabel": "국적",
-    "nationalityPlaceholder": "국가를 선택하세요",
-    "languageLabel": "언어",
-    "languagePlaceholder": "언어를 선택하세요",
-    "languageHelper": "게시글은 선택한 언어로 자동 번역됩니다.",
-    "joinCta": "GachiWork 가입",
+    "languageLabel": "사용 언어",
+    "joinCta": "가입 링크 받기",
     "haveAccount": "이미 계정이 있나요?",
     "loginLink": "로그인",
     "secureBadge": "🔒 종단간 암호화 플랫폼",
-    "agreement": "가입 시 근로자 보호 중심의 이용약관 및 개인정보처리방침에 동의합니다."
+    "agreement": "가입 시 근로자 보호 중심의 이용약관 및 개인정보처리방침에 동의합니다.",
+    "missingDisplayName": "닉네임을 입력해주세요.",
+    "invalidEmail": "올바른 이메일 주소를 입력해주세요."
   },
   "compose": {
     "title": "새 글 작성",
@@ -92,7 +97,8 @@
     "countryLabel": "출신 국가",
     "submitCta": "올리기",
     "cancelCta": "취소",
-    "anonymousNotice": "익명으로 게시됩니다. 닉네임만 표시됩니다."
+    "anonymousNotice": "익명으로 게시됩니다. 닉네임만 표시됩니다.",
+    "notSignedIn": "글을 올리려면 먼저 로그인해주세요."
   },
   "common": {
     "back": "뒤로",

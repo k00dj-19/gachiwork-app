@@ -1,68 +1,15 @@
 import {getTranslations, setRequestLocale} from "next-intl/server";
 import {Link} from "@/i18n/navigation";
 import {LanguageSwitcher} from "@/components/LanguageSwitcher";
+import {createSupabaseServerClient} from "@/lib/supabase/server";
 
-type Tone = "blue" | "green" | "orange" | "purple" | "red" | "pink";
+type Tone = "blue" | "green" | "orange" | "purple" | "red" | "pink" | "neutral";
 
-type Post = {
-  id: string;
-  industryKey: "manufacturing" | "agriculture" | "construction";
-  industryTone: Tone;
-  countryKey: "vietnam" | "nepal" | "cambodia";
-  countryTone: Tone;
-  timeKey: "minutes" | "hours";
-  timeCount: number;
-  titleKey: "p1" | "p2" | "p3";
-  author: string;
-  authorInitial: string;
-  comments: number;
-  hearts: number;
+const INDUSTRY_TONES: Record<string, Tone> = {
+  manufacturing: "blue",
+  agriculture: "orange",
+  construction: "purple",
 };
-
-const POSTS: Post[] = [
-  {
-    id: "p1",
-    industryKey: "manufacturing",
-    industryTone: "blue",
-    countryKey: "vietnam",
-    countryTone: "green",
-    timeKey: "minutes",
-    timeCount: 12,
-    titleKey: "p1",
-    author: "User_992",
-    authorInitial: "U",
-    comments: 14,
-    hearts: 5,
-  },
-  {
-    id: "p2",
-    industryKey: "agriculture",
-    industryTone: "orange",
-    countryKey: "nepal",
-    countryTone: "red",
-    timeKey: "hours",
-    timeCount: 2,
-    titleKey: "p2",
-    author: "User_01532",
-    authorInitial: "L",
-    comments: 3,
-    hearts: 2,
-  },
-  {
-    id: "p3",
-    industryKey: "construction",
-    industryTone: "purple",
-    countryKey: "cambodia",
-    countryTone: "pink",
-    timeKey: "hours",
-    timeCount: 5,
-    titleKey: "p3",
-    author: "User_841",
-    authorInitial: "A",
-    comments: 7,
-    hearts: 11,
-  },
-];
 
 const TONE_CLASSES: Record<Tone, string> = {
   blue: "bg-blue-50 text-blue-700",
@@ -71,16 +18,63 @@ const TONE_CLASSES: Record<Tone, string> = {
   purple: "bg-purple-50 text-purple-700",
   red: "bg-red-50 text-red-800",
   pink: "bg-pink-50 text-pink-800",
+  neutral: "bg-zinc-100 text-zinc-700",
+};
+
+type PostRow = {
+  id: string;
+  title: string;
+  body: string;
+  industry: string | null;
+  country: string | null;
+  created_at: string;
+  author: {display_name: string | null} | null;
 };
 
 type Props = {
   params: Promise<{locale: string}>;
 };
 
+function relativeTime(iso: string, locale: string): string {
+  const created = new Date(iso).getTime();
+  const diffMs = Date.now() - created;
+  const minutes = Math.max(1, Math.round(diffMs / 60_000));
+  const hours = Math.round(minutes / 60);
+  const days = Math.round(hours / 24);
+  const rtf = new Intl.RelativeTimeFormat(locale, {numeric: "auto"});
+  if (minutes < 60) return rtf.format(-minutes, "minute");
+  if (hours < 24) return rtf.format(-hours, "hour");
+  return rtf.format(-days, "day");
+}
+
 export default async function Home({params}: Props) {
   const {locale} = await params;
   setRequestLocale(locale);
   const t = await getTranslations();
+
+  const supabase = await createSupabaseServerClient();
+  const {
+    data: {user},
+  } = await supabase.auth.getUser();
+
+  let displayName: string | null = null;
+  if (user) {
+    const {data: profile} = await supabase
+      .from("profiles")
+      .select("display_name")
+      .eq("id", user.id)
+      .maybeSingle();
+    displayName = profile?.display_name ?? user.email?.split("@")[0] ?? null;
+  }
+
+  const {data: postsData} = await supabase
+    .from("posts")
+    .select("id, title, body, industry, country, created_at, author:profiles!posts_author_id_fkey(display_name)")
+    .eq("is_draft", false)
+    .order("created_at", {ascending: false})
+    .limit(20);
+
+  const posts = (postsData ?? []) as unknown as PostRow[];
 
   return (
     <div className="min-h-screen bg-zinc-50 flex justify-center">
@@ -109,19 +103,32 @@ export default async function Home({params}: Props) {
         <section className="px-5 pt-6 pb-4">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-full bg-gradient-to-br from-sky-500 to-sky-700 text-white grid place-items-center font-semibold">
-              MZ
+              {(displayName ?? "G")[0]?.toUpperCase()}
             </div>
             <div>
               <div className="font-semibold text-zinc-900">{t("brand.name")}</div>
-              <span className="inline-block text-[10px] font-bold tracking-wide text-emerald-700 bg-emerald-50 rounded-full px-2 py-0.5 mt-1">
-                {t("home.verifiedBadge")}
-              </span>
+              {user ? (
+                <span className="inline-block text-[10px] font-bold tracking-wide text-emerald-700 bg-emerald-50 rounded-full px-2 py-0.5 mt-1">
+                  {t("home.verifiedBadge")}
+                </span>
+              ) : (
+                <Link
+                  href="/signin"
+                  className="inline-block text-[10px] font-semibold tracking-wide text-sky-700 hover:text-sky-800 mt-1 underline-offset-2 hover:underline"
+                >
+                  {t("home.signinCta")}
+                </Link>
+              )}
             </div>
           </div>
           <h1 className="mt-5 text-2xl font-bold tracking-tight text-zinc-900">
-            {t("home.greeting", {name: "User_042"})}
+            {user && displayName
+              ? t("home.greeting", {name: displayName})
+              : t("home.greetingAnon")}
           </h1>
-          <p className="text-sm text-zinc-500 mt-1">{t("home.subgreeting")}</p>
+          <p className="text-sm text-zinc-500 mt-1">
+            {user ? t("home.subgreeting") : t("home.subgreetingAnon")}
+          </p>
         </section>
 
         <nav className="px-5 mb-3">
@@ -136,63 +143,64 @@ export default async function Home({params}: Props) {
         </nav>
 
         <main className="flex-1 px-5 pb-24 space-y-3">
-          {POSTS.map((post, idx) => (
-            <article
-              key={post.id}
-              className="bg-white border border-zinc-200 rounded-2xl p-4 shadow-sm"
-            >
-              <div className="flex flex-wrap items-center gap-1.5 mb-2">
-                <span
-                  className={`text-[10px] font-bold tracking-wide rounded px-2 py-0.5 ${TONE_CLASSES[post.industryTone]}`}
-                >
-                  {t(`post.tags.${post.industryKey}`)}
-                </span>
-                <span
-                  className={`text-[10px] font-bold tracking-wide rounded px-2 py-0.5 ${TONE_CLASSES[post.countryTone]}`}
-                >
-                  {t(`post.countries.${post.countryKey}`)}
-                </span>
-                <span className="text-xs text-zinc-400 ml-auto">
-                  {t(`post.timeAgo.${post.timeKey}`, {count: post.timeCount})}
-                </span>
-              </div>
-              <h3 className="text-base font-semibold text-zinc-900 leading-snug">
-                {t(`samplePost.${post.titleKey}`)}
+          {posts.length === 0 ? (
+            <div className="bg-white border border-zinc-200 rounded-2xl p-8 text-center">
+              <h3 className="text-base font-semibold text-zinc-900">
+                {t("home.emptyTitle")}
               </h3>
-              <div className="mt-3 flex items-center justify-between text-sm text-zinc-500">
-                <div className="flex items-center gap-2">
-                  <span className="w-6 h-6 rounded-full bg-zinc-200 text-zinc-600 grid place-items-center text-[11px] font-semibold">
-                    {post.authorInitial}
-                  </span>
-                  <span>{post.author}</span>
-                </div>
-                <div className="flex items-center gap-3 text-zinc-400">
-                  <span aria-label="comments" className="flex items-center gap-1">
-                    💬 {post.comments}
-                  </span>
-                  <span aria-label="likes" className="flex items-center gap-1">
-                    ♥ {post.hearts}
-                  </span>
-                </div>
-              </div>
-              {idx === 0 && (
-                <div className="mt-4 -mx-4 -mb-4 p-4 rounded-b-2xl bg-amber-50 border-t border-amber-100">
-                  <span className="text-[10px] font-bold tracking-wide text-amber-700">
-                    {t("home.officialGuideTag")}
-                  </span>
-                  <h4 className="text-sm font-semibold text-amber-900 mt-1">
-                    {t("home.officialGuideTitle")}
-                  </h4>
-                  <p className="text-xs text-amber-800/80 mt-1">
-                    {t("home.officialGuideBody")}
-                  </p>
-                  <button className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-white bg-amber-600 hover:bg-amber-700 rounded-full px-3 py-1.5">
-                    {t("home.officialGuideCta")} →
-                  </button>
-                </div>
-              )}
-            </article>
-          ))}
+              <p className="text-sm text-zinc-500 mt-2 leading-relaxed">
+                {t("home.emptyBody")}
+              </p>
+            </div>
+          ) : (
+            posts.map((post) => {
+              const tone = post.industry
+                ? INDUSTRY_TONES[post.industry] ?? "neutral"
+                : "neutral";
+              const authorName = post.author?.display_name ?? "—";
+              const initial = (authorName[0] ?? "U").toUpperCase();
+              return (
+                <article
+                  key={post.id}
+                  className="bg-white border border-zinc-200 rounded-2xl p-4 shadow-sm"
+                >
+                  <div className="flex flex-wrap items-center gap-1.5 mb-2">
+                    {post.industry && (
+                      <span
+                        className={`text-[10px] font-bold tracking-wide rounded px-2 py-0.5 ${TONE_CLASSES[tone]}`}
+                      >
+                        {post.industry.toUpperCase()}
+                      </span>
+                    )}
+                    {post.country && (
+                      <span className="text-[10px] font-bold tracking-wide rounded px-2 py-0.5 bg-zinc-100 text-zinc-700">
+                        {post.country.toUpperCase()}
+                      </span>
+                    )}
+                    <span className="text-xs text-zinc-400 ml-auto">
+                      {relativeTime(post.created_at, locale)}
+                    </span>
+                  </div>
+                  <h3 className="text-base font-semibold text-zinc-900 leading-snug">
+                    {post.title}
+                  </h3>
+                  {post.body && (
+                    <p className="text-sm text-zinc-600 mt-1 line-clamp-3 whitespace-pre-wrap">
+                      {post.body}
+                    </p>
+                  )}
+                  <div className="mt-3 flex items-center justify-between text-sm text-zinc-500">
+                    <div className="flex items-center gap-2">
+                      <span className="w-6 h-6 rounded-full bg-zinc-200 text-zinc-600 grid place-items-center text-[11px] font-semibold">
+                        {initial}
+                      </span>
+                      <span>{authorName}</span>
+                    </div>
+                  </div>
+                </article>
+              );
+            })
+          )}
         </main>
 
         <Link
