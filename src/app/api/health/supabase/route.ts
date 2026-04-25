@@ -21,22 +21,23 @@ export async function GET() {
     );
   }
 
-  // Verify the URL is shaped like a Supabase URL and is reachable via REST head.
+  // Verify the URL is shaped like a Supabase URL and the project responds.
+  // We hit /auth/v1/health which is a public health endpoint Supabase exposes.
   try {
     const projectHost = new URL(url).host;
     const isSupabase = projectHost.endsWith(".supabase.co");
-    const ping = await fetch(`${url}/rest/v1/`, {
-      method: "HEAD",
+    const ping = await fetch(`${url}/auth/v1/health`, {
+      method: "GET",
       headers: {apikey: anon},
       cache: "no-store",
     });
 
     return NextResponse.json({
-      ok: ping.ok,
+      ok: ping.ok && isSupabase,
       env,
       url_host: projectHost,
       is_supabase_host: isSupabase,
-      rest_status: ping.status,
+      auth_status: ping.status,
     });
   } catch (err) {
     return NextResponse.json(
