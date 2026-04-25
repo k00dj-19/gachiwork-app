@@ -1,0 +1,102 @@
+{
+  "brand": {
+    "name": "GachiWork",
+    "gachi": "Gachi",
+    "work": "Work"
+  },
+  "nav": {
+    "menu": "Menu",
+    "language": "Language",
+    "createPost": "Create post"
+  },
+  "home": {
+    "verifiedBadge": "✓ VERIFIED E-9",
+    "greeting": "Hello, {name}",
+    "subgreeting": "Activity from your boards and communities.",
+    "tabFollowed": "Followed Boards",
+    "tabCommunity": "Community Pages",
+    "officialGuideTag": "OFFICIAL GUIDE",
+    "officialGuideTitle": "Renewing your E-9 Visa?",
+    "officialGuideBody": "Step-by-step documentation guide for 2026 industrial workers.",
+    "officialGuideCta": "Read Guide"
+  },
+  "post": {
+    "tags": {
+      "manufacturing": "MANUFACTURING",
+      "agriculture": "AGRICULTURE",
+      "construction": "CONSTRUCTION"
+    },
+    "countries": {
+      "vietnam": "VIETNAM",
+      "nepal": "NEPAL",
+      "cambodia": "CAMBODIA"
+    },
+    "timeAgo": {
+      "minutes": "{count}m ago",
+      "hours": "{count}h ago"
+    }
+  },
+  "samplePost": {
+    "p1": "Has anyone had trouble with the new safety certification in Ansan?",
+    "p2": "Looking for a translation of the latest dorm regulations. My boss gave us a paper but it's only in Korean.",
+    "p3": "Any recommended clinics in Pyeongtaek that are open on Sundays for workers?"
+  },
+  "auth": {
+    "signinTitle": "GachiWork",
+    "signinSubtitle": "Welcome back, your community is waiting.",
+    "userIdLabel": "User ID (Anonymous ID)",
+    "userIdPlaceholder": "Enter your ID",
+    "userIdHelper": "Your ID is found in your onboarding documents.",
+    "passwordLabel": "Password",
+    "forgotPassword": "Forgot Password?",
+    "signinCta": "Sign In",
+    "orSecure": "OR SECURE LINK",
+    "googleSignin": "Sign in with Google",
+    "noAccount": "Don't have an account?",
+    "signupLink": "Sign Up",
+    "globalSupport": "GLOBAL SUPPORT AVAILABLE"
+  },
+  "regions": {
+    "southeastAsia": "Southeast Asia",
+    "southAsia": "South Asia",
+    "centralEastAsia": "Central / East Asia"
+  },
+  "signup": {
+    "title": "Create Account",
+    "subtitle": "Start your journey safely and anonymously. Your privacy is our priority.",
+    "togglePrivacy": "Full Privacy",
+    "toggleSecure": "Secure Work",
+    "nicknameLabel": "Nickname (User ID)",
+    "nicknamePlaceholder": "e.g. BlueSkyWorker",
+    "nicknameHelper": "Use a nickname. Do not use your real name for anonymity.",
+    "passwordLabel": "Password",
+    "nationalityLabel": "Nationality",
+    "nationalityPlaceholder": "Select your country",
+    "languageLabel": "Language",
+    "languagePlaceholder": "Select your language",
+    "languageHelper": "Posts are auto-translated from your language.",
+    "joinCta": "Join GachiWork",
+    "haveAccount": "Already have an account?",
+    "loginLink": "Log in",
+    "secureBadge": "🔒 END-TO-END SECURE PLATFORM",
+    "agreement": "By joining, you agree to our Terms of Service and Privacy Policy focusing on worker protection."
+  },
+  "compose": {
+    "title": "New Post",
+    "subtitle": "Write freely in your language. Posts are auto-translated for readers in other languages.",
+    "postTitleLabel": "Title",
+    "postTitlePlaceholder": "What happened?",
+    "postBodyLabel": "Body",
+    "postBodyPlaceholder": "Describe what's going on...",
+    "industryLabel": "Industry",
+    "countryLabel": "Country",
+    "submitCta": "Post",
+    "cancelCta": "Cancel",
+    "anonymousNotice": "Posted anonymously. Only your nickname is shown."
+  },
+  "common": {
+    "back": "Back",
+    "loading": "Loading...",
+    "error": "Something went wrong."
+  }
+}

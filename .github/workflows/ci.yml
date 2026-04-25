@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  guards:
+    name: Static guards
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Service-role key import guard
+        run: |
+          set -e
+          # Allow references only under src/app/api/admin/.
+          # Match any file under src/app/ that is NOT under src/app/api/admin/.
+          OFFENDERS=$(grep -RIn --include='*.ts' --include='*.tsx' --include='*.js' --include='*.jsx' \
+            'SUPABASE_SERVICE_ROLE_KEY' src/app 2>/dev/null \
+            | grep -v '^src/app/api/admin/' || true)
+          if [ -n "$OFFENDERS" ]; then
+            echo "::error::SUPABASE_SERVICE_ROLE_KEY referenced outside src/app/api/admin/:"
+            echo "$OFFENDERS"
+            exit 1
+          fi
+          echo "OK: no service-role key references outside admin paths."
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Install
+        run: npm ci
+
+      - name: Type-check
+        run: npx tsc --noEmit
+
+      - name: Lint
+        run: npm run lint

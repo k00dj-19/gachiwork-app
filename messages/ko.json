@@ -1,0 +1,102 @@
+{
+  "brand": {
+    "name": "GachiWork",
+    "gachi": "Gachi",
+    "work": "Work"
+  },
+  "nav": {
+    "menu": "메뉴",
+    "language": "언어",
+    "createPost": "글 작성"
+  },
+  "home": {
+    "verifiedBadge": "✓ E-9 인증",
+    "greeting": "안녕하세요, {name}님",
+    "subgreeting": "팔로우한 보드와 커뮤니티의 활동입니다.",
+    "tabFollowed": "팔로우한 보드",
+    "tabCommunity": "커뮤니티 페이지",
+    "officialGuideTag": "공식 가이드",
+    "officialGuideTitle": "E-9 비자 갱신 안내",
+    "officialGuideBody": "2026년 산업 근로자를 위한 단계별 서류 가이드.",
+    "officialGuideCta": "가이드 읽기"
+  },
+  "post": {
+    "tags": {
+      "manufacturing": "제조업",
+      "agriculture": "농업",
+      "construction": "건설업"
+    },
+    "countries": {
+      "vietnam": "베트남",
+      "nepal": "네팔",
+      "cambodia": "캄보디아"
+    },
+    "timeAgo": {
+      "minutes": "{count}분 전",
+      "hours": "{count}시간 전"
+    }
+  },
+  "samplePost": {
+    "p1": "안산의 새로운 안전 인증 때문에 어려움을 겪으신 분 계신가요?",
+    "p2": "기숙사 규정 최신 번역본을 찾고 있어요. 사장님이 서류를 줬는데 한국어밖에 없네요.",
+    "p3": "평택에서 일요일에 여는 근로자 진료소 추천해 주실 분?"
+  },
+  "auth": {
+    "signinTitle": "GachiWork",
+    "signinSubtitle": "다시 만나서 반가워요. 커뮤니티가 기다리고 있습니다.",
+    "userIdLabel": "사용자 ID (익명 ID)",
+    "userIdPlaceholder": "ID를 입력하세요",
+    "userIdHelper": "온보딩 서류에 ID가 적혀 있습니다.",
+    "passwordLabel": "비밀번호",
+    "forgotPassword": "비밀번호 찾기",
+    "signinCta": "로그인",
+    "orSecure": "또는 보안 링크로",
+    "googleSignin": "Google로 로그인",
+    "noAccount": "계정이 없으신가요?",
+    "signupLink": "가입하기",
+    "globalSupport": "전 세계 지원 가능"
+  },
+  "regions": {
+    "southeastAsia": "동남아시아",
+    "southAsia": "남아시아",
+    "centralEastAsia": "중앙/동아시아"
+  },
+  "signup": {
+    "title": "계정 만들기",
+    "subtitle": "안전하고 익명으로 여정을 시작하세요. 개인정보 보호가 최우선입니다.",
+    "togglePrivacy": "완전 익명",
+    "toggleSecure": "안전한 일자리",
+    "nicknameLabel": "닉네임 (사용자 ID)",
+    "nicknamePlaceholder": "예: BlueSkyWorker",
+    "nicknameHelper": "익명성을 위해 본명 대신 닉네임을 사용하세요.",
+    "passwordLabel": "비밀번호",
+    "nationalityLabel": "국적",
+    "nationalityPlaceholder": "국가를 선택하세요",
+    "languageLabel": "언어",
+    "languagePlaceholder": "언어를 선택하세요",
+    "languageHelper": "게시글은 선택한 언어로 자동 번역됩니다.",
+    "joinCta": "GachiWork 가입",
+    "haveAccount": "이미 계정이 있나요?",
+    "loginLink": "로그인",
+    "secureBadge": "🔒 종단간 암호화 플랫폼",
+    "agreement": "가입 시 근로자 보호 중심의 이용약관 및 개인정보처리방침에 동의합니다."
+  },
+  "compose": {
+    "title": "새 글 작성",
+    "subtitle": "당신의 언어로 자유롭게 적어주세요. 다른 언어 사용자를 위해 자동 번역됩니다.",
+    "postTitleLabel": "제목",
+    "postTitlePlaceholder": "어떤 일이 있었나요?",
+    "postBodyLabel": "내용",
+    "postBodyPlaceholder": "상황을 자세히 적어주세요...",
+    "industryLabel": "업종",
+    "countryLabel": "출신 국가",
+    "submitCta": "올리기",
+    "cancelCta": "취소",
+    "anonymousNotice": "익명으로 게시됩니다. 닉네임만 표시됩니다."
+  },
+  "common": {
+    "back": "뒤로",
+    "loading": "불러오는 중...",
+    "error": "오류가 발생했습니다."
+  }
+}
